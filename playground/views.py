@@ -5,6 +5,10 @@ from django.http import HttpResponse
 def HelloWorld (request):  
     return render(request, 'hello.html', {'name': 'World'})
 
+def Test (request):
+    return render(request, 'Lab2.html')
+    
+
 
 
 

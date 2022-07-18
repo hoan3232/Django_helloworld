@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .bgimg {
+        background-position: center;
+        background-size: cover;
+        background-image: url("Switch6.jpg");
+        min-height: 75%;
+    }
+</style>
+<body>
+<div class="bgimg">
+<font face="ArcadeClassic">
+    <h1>Got a problem?</h1>
+    <form action="http://localhost:63342/HTMLlab1/.idea/Lab1.html?_ijt=mtj5ipq56de66jrml0piefh6j4">
+          <div>
+              <label for="name">
+                  <b> Name: </b><input type="text" id="name" placeholder="Name" required minlength="0">
+              </label>
+          </div>
+        <br>
+        <div>
+            <label for="email">
+                <b> Email: </b><input type="email" id="email" placeholder="Email" required minlength="0">
+            </label>
+        </div>
+        <br>
+        <div>
+            <b>Select the game: </b>
+            <select name="game" id="game">
+                <option value="1">Super Mario Bros</option>
+                <option value="2">Exitcebike</option>
+                <option value="3">The Legend Of Zelda</option>
+                <option value="4">Contra</option>
+                <option value="5">Tetris</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <b><fontsize="4">Describe your issue</fontsize></b>
+            <br>
+            <textarea name="comment" id="comment" cols="70" rows="20" placeholder="Type in here!" required minlength="0" wrap></textarea>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset button</button>
+        </div>
+    </form>
+</font>
+</div>
+</body>
+</html>
