@@ -145,9 +145,18 @@ WSGI_APPLICATION = 'StarterProject.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+   # 'default': {
+     #   'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'twqfnxhx',
+        'USER': 'twqfnxhx',
+        'PASSWORD': 'Z3h4faJNh6-2dX4Hc3jNW0tq7htR113E',
+        'HOST': 'kesavan.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
 
