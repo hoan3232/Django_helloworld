@@ -1,5 +1,4 @@
-	PN Informatics Technology
-		Django-Demo
+PN Informatics Technology - Django Demo
 
 Joining PN company project by Hoan and Thong
 
