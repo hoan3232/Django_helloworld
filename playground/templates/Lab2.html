@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% load static %}
-<link rel="stylesheet" href="{% static 'Lab2.css' %}">
+<link rel="stylesheet" type = "text/css" href="{% static '/css/Lab2.css' %}">
 <style>
     body, html
     {
@@ -35,7 +35,7 @@
 <!-- Header with video -->
 <header>
     <div class="videoWrapper" style="--aspect-ratio: 21 / 9;">
-        <video width="1280" height="720" src="Video/Introvideo.mp4" muted loop autoplay></video>
+        <video width="1280" height="720" src="{% static '/Video/Introvideo.mp4' %}" muted loop autoplay></video>
     </div>
     <div class="display-bottomleft center padding-large">
         <span class="tag">www.nintendo.com</span>
@@ -60,7 +60,7 @@
                 <p><i>"The day of the release will be an unforgetable day!"</i></p>
                 <p>Chef, Designer and Co-Owner: Shigeru Miyamoto</p>
             </div>
-            <img src="Switch1.jpg" style="width:100%;max-width:1000px" class="margin-top">
+            <img src="{% static '/pic/Switch1.jpg' %}" style="width:100%;max-width:1000px" class="margin-top">
             <p><strong>Release day:</strong> March 3, 2017.</p>
             <p><strong>Price:</strong> US$299.99</p>
         </div>
@@ -75,18 +75,18 @@
             <div class="center grid-container">
                 <div class="grid-item">
                     <a href="https://www.nintendo.com/switch/compare/" target="_blank">
-                        <img src="Switch2.jpg" style="width:300px; height:500px" class="margin-top">
+                        <img src="{% static '/pic/Switch2.jpg' %}" style="width:300px; height:500px" class="margin-top">
                         Game Consoles
                     </a>
                 </div>
                 <div class="grid-item">
                     <a href="https://www.nintendo.com/games/switch/" target="_blank">
-                        <img src="Switch3.jpg" style="width:300px; height:500px" class="margin-top">
+                        <img src="{% static '/pic/Switch3.jpg' %}" style="width:300px; height:500px" class="margin-top">
                         Games
                     </a>
                 </div>
             </div>
-            <video class="video" id="video" src="Video/Bodyvideo.mp4" muted preload="auto"></video>
+            <video class="video" id="video" src="{% static '/Video/Bodyvideo.mp4' %}" muted autoplay></video>
         </div>
     </div>
 
@@ -95,7 +95,7 @@
         <div class="content" style="max-width:700px">
             <h3 class="center padding-48"><span class="tag wide">WHERE TO FIND ONE</span></h3>
             <p><a href="https://www.nintendo.com/consumer/retail/retail_retailers.jsp" target="_blank">Find your own Switch at any Nintendo partnership store!</a></p>
-            <img src="Switch5.jpg" class="image" style="width:100%">
+            <img src="{% static '/pic/Switch5.jpg' %}" class="image" style="width:100%">
             <p><span class="tag">FYI!</span> We also have delivery for those who wants to purchase one online. We also have an 24/7 helpdesk for those who wants to have more information of the Switch.</p>
             <p><strong> For purchasing </strong> fill in the form with your name, email, time and date for shipping and the quantities:</p>
             <form action="https://www.nintendo.com/" target="_blank">
@@ -114,7 +114,6 @@
                 </div>
                 <button class="button black" type="submit">SEND MESSAGE</button>
             </form>
-            <p><a href="Q&AForm.html" target="_blank">Click here to get online support!</a> </p>
         </div>
     </div>
     <!-- End page content -->
