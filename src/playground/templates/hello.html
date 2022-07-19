@@ -7,8 +7,11 @@
     <title>Hello</title>
   </head>
   <body>
-    <h1>Hello {{name}}</h1>
-    <button>Testing</button>
+    <h1>Ordered customer</h1>
+    {% for cus in customers %}
+      <p>{{cus.name}} - {{cus.email}} - {{cus.quantity}} - {{cus.dates}}</p>
+    {% endfor %}
+    <p></p>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

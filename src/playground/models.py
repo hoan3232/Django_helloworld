@@ -9,3 +9,4 @@ class Customer(models.Model):
     dates = models.DateTimeField(default =  datetime.datetime.now )
     def __str__(self) :
         return self.name
+    
