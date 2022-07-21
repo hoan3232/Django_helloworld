@@ -34,6 +34,6 @@ def signup_user(request):
         user.first_name = fname
         user.last_name = lname
         user.save()
-        return redirect('signin')
+        return redirect('sign   in')
 
     return render(request,'signup.html',{})
