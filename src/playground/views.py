@@ -5,12 +5,8 @@ from playground.models import Customer
 
 
 def HelloWorld (request):
-    customers = Customer.objects.all()
-    return render(request, 'hello.html', {'customers': customers})
+    return render(request, 'shop.html', {})
 
-def Test (request):
-    return render(request, 'Lab2.html')
-    
 
 
 

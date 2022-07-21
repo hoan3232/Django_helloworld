@@ -1,6 +1,8 @@
+import django
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -18,3 +20,20 @@ def signin_user(request):
             return redirect('signin')
     else:
         return render(request, 'signin.html', {})
+
+def signup_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        fname = request.POST['firstName']
+        lname = request.POST['lastName']
+        email = request.POST['email']
+        password1 = request.POST['password']
+        password2 = request.POST['cfmpassword']
+        
+        user = User.objects.create_user(username,email,password2)
+        user.first_name = fname
+        user.last_name = lname
+        user.save()
+        return redirect('sign   in')
+
+    return render(request,'signup.html',{})
