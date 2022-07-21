@@ -2,7 +2,7 @@ import django
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -23,14 +23,17 @@ def signin_user(request):
 
 def signup_user(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = authenticate(username = username, password = password)
-            return redirect('signin')
-    else:
-        form = UserCreationForm()
+        username = request.POST['username']
+        fname = request.POST['firstName']
+        lname = request.POST['lastName']
+        email = request.POST['email']
+        password1 = request.POST['password']
+        password2 = request.POST['cfmpassword']
+        
+        user = User.objects.create_user(username,email,password2)
+        user.first_name = fname
+        user.last_name = lname
+        user.save()
+        return redirect('signin')
 
     return render(request,'signup.html',{})
