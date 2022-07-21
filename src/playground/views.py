@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from playground.models import Customer
 
 
 def HelloWorld (request):
