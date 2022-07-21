@@ -10,12 +10,6 @@ def HelloWorld (request):
 
 def Test (request):
     return render(request, 'Lab2.html')
-
-def SignUp (request):
-    return render(request, 'signup.html')
-
-def SignIn (request):
-    return render(request, 'signin.html')
     
 
 
