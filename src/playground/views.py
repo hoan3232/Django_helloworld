@@ -8,8 +8,6 @@ def HelloWorld (request):
     return render(request, 'shop.html', {})
 
 
-    
-
 
 
 

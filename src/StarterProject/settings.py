@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'playground',
     "debug_toolbar",
     'bootstrap5',
-    'user_auth'
+    'user_auth',
+    'shoppingcart'
 ]
 STATIC_URL = "static/"
 

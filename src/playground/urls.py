@@ -3,6 +3,5 @@ from . import views
 
 #URLconf
 urlpatterns = [
-    path('shop/', views.HelloWorld),
-    
+
 ]
