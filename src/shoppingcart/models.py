@@ -10,16 +10,16 @@ class Customer(models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=True)
-    #image
+    image = models.ImageField(null=True, blank=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Order(models.Model):
@@ -28,7 +28,7 @@ class Order(models.Model):
     complete = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
 
-    def _str_(self):
+    def __str__(self):
         return str(self.id)
 
 class OrderItem(models.Model):
@@ -46,7 +46,7 @@ class ShippingAddress(models.Model):
     district = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.address    
 
 
