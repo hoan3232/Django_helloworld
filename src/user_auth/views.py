@@ -24,15 +24,15 @@ def signin_user(request):
 def signup_user(request):
     if request.method == "POST":
         username = request.POST['username']
-        fname = request.POST['firstName']
-        lname = request.POST['lastName']
+        #fname = request.POST['firstName']
+        #lname = request.POST['lastName']
         email = request.POST['email']
         password1 = request.POST['password']
         password2 = request.POST['cfmpassword']
         
         user = User.objects.create_user(username,email,password2)
-        user.first_name = fname
-        user.last_name = lname
+        #user.first_name = fname
+        #user.last_name = lname
         user.save()
         return redirect('signin')
 
