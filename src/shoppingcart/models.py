@@ -15,7 +15,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
@@ -37,7 +37,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.transaction_id)
     
     @property
     def get_cart_total(self):
@@ -58,7 +58,7 @@ class Order(models.Model):
         for i in orderitems:
             if i.product.digital == False:
                 shipping = True
-            return shipping
+        return shipping
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
