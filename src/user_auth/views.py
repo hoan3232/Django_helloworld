@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+from shoppingcart.models import Customer
+
 # Create your views here.
 
 def signin_user(request):
@@ -34,6 +36,8 @@ def signup_user(request):
         user.first_name = fname
         user.last_name = lname
         user.save()
+
+        
         return redirect('signin')
 
     return render(request,'signup.html',{})
