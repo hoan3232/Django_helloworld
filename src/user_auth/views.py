@@ -13,8 +13,8 @@ def signin_user(request):
         user = authenticate(request, username = username, password = password)
         if user is not None:
             login(request, user)
-            messages.success(request,("Login successfully"))
-            return redirect('signin')
+        
+            return redirect('store')
         else:
             messages.success(request,("Login failled, please try again"))
             return redirect('signin')
@@ -41,4 +41,4 @@ def signup_user(request):
 
 def logout_user(request):
     logout(request)
-    #return redirect('home')
+    return redirect('store')
