@@ -34,6 +34,11 @@ def signup_user(request):
         user.first_name = fname
         user.last_name = lname
         user.save()
-        return redirect('sign   in')
+        return redirect('signin')
 
     return render(request,'signup.html',{})
+
+
+def logout_user(request):
+    logout(request)
+    #return redirect('home')

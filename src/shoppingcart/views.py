@@ -1,8 +1,11 @@
 from multiprocessing import context
-from django.shortcuts import render
+from re import template
+from webbrowser import get
+from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.http import JsonResponse
 import json
+from .forms import *
 
 
 # Create your views here.
@@ -74,3 +77,29 @@ def updateItem(request):
     if orderItem.quantity <= 0:
         orderItem.delete()
     return JsonResponse('Item was added', safe=False)
+
+
+def post_comment(request, slug): 
+    template = ''
+    post = get_object_or_404(Product, slug=slug)
+    comments = post.comments.filter(active=True)
+
+    ew_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = post
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, template, {'post': post,
+                                           'comments': comments,
+                                           'new_comment': new_comment,
+                                           'comment_form': comment_form})
