@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.http import JsonResponse
 import json
+import datetime
 from .forms import *
 
 
@@ -78,6 +79,34 @@ def updateItem(request):
         orderItem.delete()
     return JsonResponse('Item was added', safe=False)
 
+def processOrder(request):
+    print('Data:', request.body)
+    transactionID = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transactionID
+
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                sub_district=data['shipping']['sub_district'],
+                district=data['shipping']['district']
+            )
+    else:
+        print('Not authen user')
+
+    return JsonResponse('Payment done', safe=False)
 
 def post_comment(request, slug): 
     template = ''
