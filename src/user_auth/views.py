@@ -18,6 +18,7 @@ def signin_user(request):
         
             return redirect('store')
         else:
+            #aaaaaa
             messages.success(request,("Login failled, please try again"))
             return redirect('signin')
     else:
