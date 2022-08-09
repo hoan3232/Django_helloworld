@@ -7,5 +7,7 @@ urlpatterns = [
     path('Store/', views.Store, name='store'),
     path('update_item/', views.updateItem, name='update_item'),
     path('process_order/', views.processOrder, name='process_order'),
-    path('<slug:slug>/', views.post_comment, name='post_commnent')
+    #path('<slug:slug>/', views.post_comment, name='post_commnent'),
+    path('Details/<int:id>', views.Details, name='details'),
+    path('Home/', views.Home, name='Home')
 ]

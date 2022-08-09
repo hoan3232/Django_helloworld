@@ -1,3 +1,4 @@
+from itertools import product
 from multiprocessing import context
 from re import template
 from webbrowser import get
@@ -25,6 +26,30 @@ def Store(request):
     products = Product.objects.all()
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store.html', context)
+
+def Details(request, id):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cartItems = order['get_cart_items']
+
+    product = get_object_or_404(Product, id=id)
+    context = {'title':'Details', 'product':product, 'cartItems':cartItems}
+    return render(request, 'details.html', context)
+
+def Home(request):
+    products = Product.objects.all()
+    product1 = get_object_or_404(Product, id=2)
+    product2 = get_object_or_404(Product, id=3)
+    product3 = get_object_or_404(Product, id=4)
+    context={'product1':product1, 'product2':product2, 'product3':product3}
+    
+    return render(request, 'home.html', context)
 
 def Cart(request):
 
@@ -132,3 +157,4 @@ def post_comment(request, slug):
                                            'comments': comments,
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
+
