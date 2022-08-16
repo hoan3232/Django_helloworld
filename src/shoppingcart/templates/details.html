@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+{% endblock %}
+{% block content %}
+<div class="main container-fluid">
+    <div class="row border-bottom category">
+        <h6 class="viewed_title p-1 col-auto mr-auto"><span>Book Details</span></h6>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6 text-center">
+                <img src="{{product.imageURL}}" class="shadow-lg" alt="">
+        </div>
+        <div class="col-md-6" style="background-color: #f0f1f4;">
+            <h3>
+                {{product.name}}
+            </h3>
+            <p class="mb-2 text-muted small"><b>Author:</b>
+                Test
+            </p>
+            <p class="mb-2 text-muted small"><b>Digital:</b>
+                Test
+            </p>
+            <div class="price-box">
+                <span class="product-price">
+                    ${{product.price|floatformat:2}}
+                </span>
+            </div>
+            <div class="rte description rte-summary">
+                <strong class="text-muted">Description:</strong>
+                <p class="text-justify">
+                    Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he fails, humanity and the earth itself will perish. Except that right now, he doesn’t know that. He can’t even remember his own name, let alone the nature of his assignment or how to complete it. All he knows is that he’s been asleep for a very, very long time. And he’s just been awakened to find himself millions of miles from home, with nothing but two corpses for company.
+
+
+                </p>
+            </div>
+            <hr>
+            <button data-product={{product.id}} data-action ="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+        </div>
+    </div>
+{% endblock content %}
