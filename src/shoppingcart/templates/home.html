@@ -9,25 +9,23 @@
 
 	<!-- CSS files -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'owlcarousel/assets/owl.carousel.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'owlcarousel/assets/owl.theme.default.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'owlcarousel/assets/owl.theme.default.css' %}">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"rel="stylesheet'>
 	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
-
-    <link rel="stylesheet" href="{% static 'owlcarousel/assets/owl.carousel.min.css' %}">
-	<link rel="stylesheet" href="{% static 'owlcarousel/assets/owl.theme.default.min.css' %}">
-	<link rel="stylesheet" href="{% static 'owlcarousel/assets/owl.theme.default.css' %}">
-
-	<link rel="shortcut icon" href="{% static  'images/logo.ico' %}">
-	<link href="{% static 'css/header.css' %}" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{%static 'images/logo.ico' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 	<!-- JS files -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	<script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'owlcarousel/owl.carousel.js' %}"></script>
+	<script type="text/javascript" src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'owlcarousel/owl.carousel.js' %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
 </head>
 
@@ -36,7 +34,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid align-items-center">
-		<a href="/"><img src="{% static  'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
+		<a href="/"><img src="{% static 'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
 		<form action="/shop" method="GET" class="form-inline ml-auto">
 			<input type="text" class="form-control mr-sm-2" name="search" placeholder="Search">
 			<button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button>
@@ -58,15 +56,15 @@
 				<li class="nav-item">
                     <a href="/cart" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i></a>
                 </li>
-				<% if (user) { %>
+				{%if user.is_authenticated %}
 				<li class="nav-item">
 					<a href="/profile" class="nav-link"><i class='bx bxs-user-circle bx-md bx-burst-hover' style='color:#5f7a61' title="Profile"></i></a>
 				</li>
-				<% } else {%> 
+				{%else %} 
 				<li class="nav-item">
-					<a href="/users/login" class="nav-link"><i class='bx bxs-log-in-circle bx-md bx-fade-right-hover' style='color:#5f7a61' title="Login" ></i></a>
+					<a href="{% url 'signin' %}" class="nav-link"><i class='bx bxs-log-in-circle bx-md bx-fade-right-hover' style='color:#5f7a61' title="Login" ></i></a>
 				</li>
-				<% }%> 
+				{%endif%}
 			</ul>
 
 		</div>
@@ -82,7 +80,7 @@
 	</ul>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img src="{% static  'images/background-HOME.png' %}" class="img-fluid">
+			<img src="{% static 'images/background-HOME.png' %}" class="img-fluid">
 			<div class="carousel-caption">
 				<h1 class="display-2">JongLe'Livre</h1>
 				<h3>Juggle the books, balance the world</h3>
@@ -91,10 +89,10 @@
 			</div>
 		</div>
 		<div class="carousel-item">
-			<img src="{% static  'images/summer_banner.png' %}" alt="">
+			<img src="{% static 'images/summer_banner.png' %}" alt="">
 		</div>
 		<div class="carousel-item">
-			<img src="{% static  'images/banner2.png' %}" alt="">
+			<img src="{% static 'images/banner2.png' %}" alt="">
 		</div>
 	</div>
 </div>
@@ -136,17 +134,17 @@
 		<div class="cards__wrapper">
 			<div class="_card current--card">
 				<div class="card__image">
-					<a href="#"><img src="{{product1.imageURL}}"/></a>
+					<a href="{% url 'details' product1.id %}"><img src="{{product1.imageURL}}" /></a>
 				</div>
 			</div>
 			<div class="_card next--card">
 				<div class="card__image">
-					<a href="#"><img src="{{product2.imageURL}}" /></a>
+					<a href="{% url 'details' product2.id %}"><img src="{{product2.imageURL}}" /></a>
 				</div>
 			</div>
 			<div class="_card previous--card">
 				<div class="card__image">
-					<a href="#"><img src="{{product3.imageURL}}" /></a>
+					<a href="{% url 'details' product2.id %}>"><img src="{{product3.imageURL}}" %> /></a>
 				</div>
 			</div>
 		</div>
@@ -162,19 +160,19 @@
 		<div class="info__wrapper">
 			<div class="info current--info">
 				<h3 class="text name">
-					${{product1.price|floatformat:2}}
+                    ${{product1.price|floatformat:2}}
 				</h3>
 			</div>
 
 			<div class="info next--info">
 				<h3 class="text name">
-					${{product2.price|floatformat:2}}
+                    ${{product2.price|floatformat:2}}
 				</h3>
 			</div>
 
 			<div class="info previous--info">
 				<h3 class="text name">
-					${{product3.price|floatformat:2}}
+                    ${{product3.price|floatformat:2}}
 				</h3>
 			</div>
 		</div>
@@ -205,12 +203,12 @@
 </div>
 
 <!-- Books section -->
-<% for (let [_, category] of Object.entries(books)) { %>
+{% for product in products %}
 	<div class="bbb_viewed">
 		<div class="container-fluid padding bbb_main_container">
 			<div class="bbb_viewed_title_container row align-items-center">
 				<h3 class="bbb_viewed_title col-auto mr-auto"><a href="">
-						<%= category[0].category %>
+						Test
 					</a></h3>
 				<div class="bbb_viewed_nav_container col-auto">
 					<div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
@@ -219,28 +217,24 @@
 			</div>
 			<div class="bbb_viewed_slider_container">
 				<div class="owl-carousel owl-theme bbb_viewed_slider">
-					<% category.forEach(function(book){ %>
 						<div class="owl-item">
 							<div
 								class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
 								<div class="bbb_viewed_image shadow border rounded">
-									<a href="/shop/book/<%= book._id %>" title="<%= book.name %>">
-										<img src="<%= book.image %>">
+									<a href="{% url 'details' product.id %}" title="{{product.name}}">
+										<img src="{{product.imageURL}}">
 									</a>
 									
 								</div>
 								<div class="bbb_viewed_content text-center">
 									<div class="bbb_viewed_price">
-										<%= (book.price * 75 / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."
-											) %>
-											VND
+										${{product.price|floatformat:2}}
 											<div>
-												<%= book.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "." ) %>
-													VND
+                                                ${{product.price|floatformat:2}}
 											</div>
 									</div>
-									<div class="bbb_viewed_name"><a href="/shop/book/<%= book._id %>" title="<%= book.name %>">
-											<%= book.name %>
+									<div class="bbb_viewed_name"><a href="{% url 'details' product.id %}" title="{{product.name}}">
+											{{product.name}}
 										</a></div>
 								</div>
 								<ul class="item_marks">
@@ -249,12 +243,11 @@
 								</ul>
 							</div>
 						</div>
-						<% }) %>
 				</div>
 			</div>
 		</div>
 	</div>
-	<% } %>
+{% endfor %}
 
 	<!--- Fixed background -->
 	<figure>
@@ -272,7 +265,7 @@
 				<p>We focus on providing exceptional results in the shortest amount of time possible, embracing trends and sustainability practices and changing the world. In our busy, fast-paced culture, we focus on building long-term relationships, both within our own team and with our customers. We strive to act like a partner to our clients and combine traditional values with innovative ideas to deliver unparalleled service.</p>
 			</div>
 			<div class="col-lg-6">
-				<img src="{% static  'images/2008.i506.017_Judaism religion flat.jpg' %}" class="img-fluid">
+				<img src="{% static 'images/2008.i506.017_Judaism religion flat.jpg' %}" class="img-fluid">
 			</div>
 		</div>
 	</div>
@@ -298,13 +291,12 @@
 	<!--- Footer -->
 	{% include 'partials/footer.html' %}
 
-
 	<!-- Scripts -->
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
-	<script src="{% static '/script/slider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/slider.js' %}"></script>
 	<script src='https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js'></script>
-	<script src="{% static '/script/script.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>

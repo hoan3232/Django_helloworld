@@ -9,5 +9,5 @@ urlpatterns = [
     path('process_order/', views.processOrder, name='process_order'),
     #path('<slug:slug>/', views.post_comment, name='post_commnent'),
     path('Details/<int:id>', views.Details, name='details'),
-    path('Home/', views.Home, name='Home')
+    path('Home/', views.Home, name='home')
 ]

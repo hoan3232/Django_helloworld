@@ -47,8 +47,9 @@ def Home(request):
     product1 = get_object_or_404(Product, id=2)
     product2 = get_object_or_404(Product, id=3)
     product3 = get_object_or_404(Product, id=4)
-    context={'product1':product1, 'product2':product2, 'product3':product3}
-    
+    products = Product.objects.all()
+
+    context={'product1':product1, 'product2':product2, 'product3':product3, 'products':products}
     return render(request, 'home.html', context)
 
 def Cart(request):

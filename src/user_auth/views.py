@@ -16,7 +16,7 @@ def signin_user(request):
         if user is not None:
             login(request, user)
         
-            return redirect('store')
+            return redirect('home')
         else:
             #aaaaaa
             messages.success(request,("Login failled, please try again"))
