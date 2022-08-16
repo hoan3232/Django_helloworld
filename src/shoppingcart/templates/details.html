@@ -18,10 +18,17 @@
                 {{product.name}}
             </h3>
             <p class="mb-2 text-muted small"><b>Author:</b>
-                Test
+                {{product.author}}
+            </p>
+            <p class="mb-2 text-muted small"><b>Category:</b>
+                {{product.category}}
             </p>
             <p class="mb-2 text-muted small"><b>Digital:</b>
-                Test
+                {% if product.digital %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
             </p>
             <div class="price-box">
                 <span class="product-price">
@@ -31,9 +38,7 @@
             <div class="rte description rte-summary">
                 <strong class="text-muted">Description:</strong>
                 <p class="text-justify">
-                    Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he fails, humanity and the earth itself will perish. Except that right now, he doesn’t know that. He can’t even remember his own name, let alone the nature of his assignment or how to complete it. All he knows is that he’s been asleep for a very, very long time. And he’s just been awakened to find himself millions of miles from home, with nothing but two corpses for company.
-
-
+                    {{product.description}}
                 </p>
             </div>
             <hr>
