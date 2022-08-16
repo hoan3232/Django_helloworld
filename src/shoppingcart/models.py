@@ -1,5 +1,6 @@
 from pickle import TRUE
 from statistics import quantiles
+from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -14,10 +15,14 @@ class Customer(models.Model):
         return self.name
 
 class Product(models.Model):
-    name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    author = models.CharField(default="",max_length=200)
+    category = models.CharField(default="",max_length=200)
+    description = models.CharField(default="",max_length=2000)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    
 
     def __str__(self):
         return self.name
