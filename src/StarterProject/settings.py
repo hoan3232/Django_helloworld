@@ -43,14 +43,15 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'bootstrap5',
     'user_auth',
-    'shoppingcart'
+    'shoppingcart',
+    'mathfilters'
 ]
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'shoppingcart/static/images')
 
-
+STATICFILES_ROOT = (os.path.join('static'),)
 
 # Default settings
 BOOTSTRAP5 = {
