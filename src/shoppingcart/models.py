@@ -17,7 +17,7 @@ class Customer(models.Model):
 class Product(models.Model):
     author = models.CharField(default="",max_length=200)
     category = models.CharField(default="",max_length=200)
-    description = models.CharField(default="",max_length=2000)
+    description = models.TextField()
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     name = models.CharField(max_length=200)
