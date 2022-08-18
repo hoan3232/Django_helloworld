@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="{% static 'css/details.css' %}">
 {% endblock %}
 {% block content %}
-<div class="main container-fluid">
+<div class="main container-fluid" id="product-section">
     <div class="row border-bottom category">
-        <h6 class="viewed_title p-1 col-auto mr-auto"><span>Book Details</span></h6>
+        <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>Book Details</span></h6>
     </div>
     <br>
     <div class="row">
@@ -31,7 +31,7 @@
                 {% endif %}
             </p>
             <div class="price-box">
-                <span class="product-price">
+                <span class="price product-price">
                     ${{product.price|floatformat:2}}
                 </span>
             </div>
@@ -45,4 +45,26 @@
             <button data-product={{product.id}} data-action ="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
         </div>
     </div>
+
+    <div class="row border-bottom category">
+        <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>Similar Products</span></h6>
+    </div>
+    <div class="intro row text-center">
+        {% for productt in products %}
+            <div class="col-2">
+                <img src="{{productt.imageURL}}" alt=""
+                    class="img-fluid row pb-3 bbb_viewed_image shadow border rounded"
+                    style="width: 150px; height: 250px">
+                <div class="bbb_viewed_content text-center">
+                    <div class="bbb_viewed_name"><a href="{% url 'details' productt.id %}">
+                            {{productt.name}}
+                        </a></div>
+                    <div class="bbb_viewed_price">
+                            {{productt.price|floatformat:2}}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}

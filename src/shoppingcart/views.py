@@ -39,17 +39,22 @@ def Details(request, id):
         cartItems = order['get_cart_items']
 
     product = get_object_or_404(Product, id=id)
-    context = {'title':'Details', 'product':product, 'cartItems':cartItems}
-    return render(request, 'details.html', context)
+    products = Product.objects.filter(category = product.category)[:6]
+    context = {'title':'Details', 'product':product, 'cartItems':cartItems, 'products':products}
+    return render(request, 'details2.html', context)
 
 def Home(request):
-    products = Product.objects.all()
     product1 = get_object_or_404(Product, id=2)
     product2 = get_object_or_404(Product, id=3)
     product3 = get_object_or_404(Product, id=4)
-    products = Product.objects.all()
 
-    context={'product1':product1, 'product2':product2, 'product3':product3, 'products':products}
+    type = ['Fiction', 'Poetry', 'Self-Help', 'Social Science']
+    category_list = []
+    for category in type:
+        category_ = {'products': Product.objects.filter(category__startswith=category), 'category':category}
+        category_list.append(category_)
+
+    context={'product1':product1, 'product2':product2, 'product3':product3, 'categories':category_list}
     return render(request, 'home.html', context)
 
 def Cart(request):
