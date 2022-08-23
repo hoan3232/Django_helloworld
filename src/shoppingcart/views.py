@@ -27,6 +27,28 @@ def Store(request):
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store.html', context)
 
+def Shop(request, type, content):
+    if type == "category":
+        if content == "All":
+            products = Product.objects.all()
+        else:
+            products = Product.objects.filter(category = content)
+    elif type == "author":
+        products = Product.objects.filter(author = content)
+    elif type == "price":
+        if content == "lt2":
+            products = Product.objects.filter(price__lt=200.000)
+        elif content == "gt3":
+            products = Product.objects.filter(price__gt=300.000)
+        elif content == "r23":
+            products = Product.objects.filter(price__range=[200.000, 300.000])
+
+    title = content
+    context = {'products':products, 'title':title}
+    return render(request, 'shop.html', context)
+
+
+
 def Details(request, id):
     if request.user.is_authenticated:
         customer = request.user.customer

@@ -1,7 +1,77 @@
-{% extends 'main2.html' %}
+<!DOCTYPE html>
 {% load static %}
 {% load mathfilters %}
-{% block content %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home | JongLe'Livre</title>
+
+	<!-- CSS files -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'owlcarousel/assets/owl.carousel.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'owlcarousel/assets/owl.theme.default.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'owlcarousel/assets/owl.theme.default.css' %}">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"rel="stylesheet'>
+	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
+	<link rel="shortcut icon" href="{%static 'images/logo.ico' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% block extracss %}{% endblock %}
+
+	<!-- JS files -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script type="text/javascript" src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'owlcarousel/owl.carousel.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+	<div class="container-fluid align-items-center">
+		<a href="/"><img src="{% static 'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
+		<form action="/shop" method="GET" class="form-inline ml-auto">
+			<input type="text" class="form-control mr-sm-2" name="search" placeholder="Search">
+			<button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button>
+		</form>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto align-items-center">
+				<li class="nav-item active-menu">
+					<a href="/" class="nav-link menu-item">Home</a>
+				</li>
+				<li class="nav-item">
+					<a href="{% url 'shop' 'All' %}" class="nav-link menu-item">Shop</a>
+				</li>
+				<li class="nav-item">
+					<a href="/about" class="nav-link menu-item">About</a>
+				</li> 
+				<li class="nav-item">
+                    <a href="/cart" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i></a>
+                </li>
+				{%if user.is_authenticated %}
+				<li class="nav-item">
+					<a href="/profile" class="nav-link"><i class='bx bxs-user-circle bx-md bx-burst-hover' style='color:#5f7a61' title="Profile"></i></a>
+				</li>
+				{% else %} 
+				<li class="nav-item">
+					<a href="{% url 'signin' %}" class="nav-link"><i class='bx bxs-log-in-circle bx-md bx-fade-right-hover' style='color:#5f7a61' title="Login" ></i></a>
+				</li>
+				{% endif %}
+			</ul>
+
+		</div>
+	</div>
+</nav>
 <!--- Image Slider -->
 <div id="slides" class="carousel slide" data-ride="carousel">
 	<ul class="carousel-indicators">
@@ -91,19 +161,19 @@
 		<div class="info__wrapper">
 			<div class="info current--info">
 				<h3 class="text name">
-                    {{product1.price|floatformat:2}} VND
+                    {{product1.price|floatformat:3}} VND
 				</h3>
 			</div>
 
 			<div class="info next--info">
 				<h3 class="text name">
-                    {{product2.price|floatformat:2}} VND
+                    {{product2.price|floatformat:3}} VND
 				</h3>
 			</div>
 
 			<div class="info previous--info">
 				<h3 class="text name">
-                    {{product3.price|floatformat:2}} VND
+                    {{product3.price|floatformat:3}} VND
 				</h3>
 			</div>
 		</div>
@@ -159,9 +229,9 @@
 								</div>
 								<div class="bbb_viewed_content text-center">
 									<div class="bbb_viewed_price">
-										{{product.price|mul:0.75|floatformat:2}} VND
+										{{product.price|mul:0.75|floatformat:3}} VND
 											<div>
-                                                {{product.price|floatformat:2}} VND
+                                                {{product.price|floatformat:3}} VND
 											</div>
 									</div>
 									<div class="bbb_viewed_name"><a href="{% url 'details' product.id %}" title="{{product.name}}">
@@ -221,4 +291,16 @@
 			</div>
 		</div>
 	</div>
-{% endblock content %}
+
+	<!--- Footer -->
+	{% include 'partials/footer.html' %}
+
+	<!-- Scripts -->
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+	<script type="text/javascript" src="{% static 'js/slider.js' %}"></script>
+	<script src='https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js'></script>
+	<script type="text/javascript" src="{% static 'js/script.js' %}"></script> 
+</body>
+
+</html>
