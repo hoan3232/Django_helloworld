@@ -1,34 +1,9 @@
-<!DOCTYPE html>
+{% extends 'main2.html' %}
 {% load static %}
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Shop | JongLe'Livre</title>
-
-    <!-- CSS files -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap'>
-    <link href="{% static 'css/shop.css' %}" rel="stylesheet">
-    <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" />
-    
-    <!-- JS files -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <script src="{% static 'js/shop.js' %}"></script>
-</head>
-<body>
-<!-- <% if (user) { %>
-    <%- include('../partials/header', {user: user}) %>
-<% } else { %> 
-    <%- include('../partials/header') %>
-<% } %>  -->
-{% include 'partials/header.html' %}
-
+{% block extracss %}
+<link href="{% static 'css/shop.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
 <!-- Main -->
 <div class="main container-fluid paddding">
     <section id="sidebar" class="col-3">
@@ -49,11 +24,11 @@
                 <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>Author</span></h6>
             </div>
             <div class="row category-content">
-                <p class="col-12"> <a href="/shop/author/Andy Weir"> Andy Weir </a> </p>
-                <p class="col-12"><a href="/shop/author/Rupi Kaur"> Rupi Kaur </a></p>
-                <p class="col-12"><a href="/shop/author/Homer"> Homer </a></p>
-                <p class="col-12"><a href="/shop/author/Charles Bukowski"> Charles Bukowski </a></p>
-                <p class="col-12"><a href="/shop/author/J.K. Rowling"> J.K. Rowling </a></p>
+                <p class="col-12"> <a href="{% url 'shop' 'author' 'Andy Weir' %}"> Andy Weir </a> </p>
+                <p class="col-12"><a href="{% url 'shop' 'author' 'Rupi Kaur' %}"> Rupi Kaur </a></p>
+                <p class="col-12"><a href="{% url 'shop' 'author' 'Homer' %}"> Homer </a></p>
+                <p class="col-12"><a href="{% url 'shop' 'author' 'Charles Bukowski' %}"> Charles Bukowski </a></p>
+                <p class="col-12"><a href="{% url 'shop' 'author' 'J.K. Rowling' %}"> J.K. Rowling </a></p>
             </div>
         </div>
         <div>
@@ -61,22 +36,16 @@
                 <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>Price Range</span></h6>
             </div>
             <div class="row category-content">
-                <p class="col-12"> <a href="/shop/price/low"> Less than 200.000 VND </a></p>
-                <p class="col-12"> <a href="/shop/price/medium"> 200.000 - 300.000 VND </a></p>
-                <p class="col-12"> <a href="/shop/price/high"> More than 300.000 VND </a></p>
+                <p class="col-12"> <a href="{% url 'shop' 'price' 'lt2' %}"> Less than 200.000 VND </a></p>
+                <p class="col-12"> <a href="{% url 'shop' 'price' 'r23' %}"> 200.000 - 300.000 VND </a></p>
+                <p class="col-12"> <a href="{% url 'shop' 'price' 'gt3' %}"> More than 300.000 VND </a></p>
             </div>
         </div>
     </section>
     <section id="products" class="col-9">
         <div class="container-fluid">
             <div class="row">
-                <h3>
-                    {% if title == 'All' %}
-                        All books
-                    {% else %}
-                        {{ title }}
-                    {% endif %}
-                </h3>
+                <h3>{{ title }}</h3>
             </div>
             <hr>
             <div class="row">
@@ -89,8 +58,8 @@
                             </a>
                         </div>
                         <div class="bbb_viewed_content text-center">
-                            <div class="bbb_viewed_name"><a href="{% url 'details' product.id %}" title="{{ product.name }}"> {{ product.name }} </a></div>
-                            <div class="bbb_viewed_price">{{ product.price|floatformat:3 }} VND</div>
+                            <div class="bbb_viewed_name"><a href="{% url 'details' product.id %}" title="{{product.name}}"> {{product.name}} </a></div>
+                            <div class="bbb_viewed_price">{{product.price|floatformat:3}} VND</div>
                         </div>
                     </div>
                     </div>
@@ -209,10 +178,4 @@
     <% } %>
 </section>
 </div>
-
-<!--- Footer -->
-{% include 'partials/footer.html' %}
-
-<script type='text/javascript'src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-</body>
-</html>
+{% endblock content %}
