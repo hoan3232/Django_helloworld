@@ -7,6 +7,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+from django.core.paginator import Paginator
 from .forms import *
 
 
@@ -27,7 +28,7 @@ def Store(request):
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store.html', context)
 
-def Shop(request, type, content):
+def shop(request, type, content, page, nomatch):
     title = content
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -57,11 +58,29 @@ def Shop(request, type, content):
         elif content == "r23":
             products = Product.objects.filter(price__range=[200.000, 300.000])
             title = '200.000 - 300.000 VND'
-
     
-    context = {'products':products, 'title':title, 'cartItems':cartItems}
-    return render(request, 'shop.html', context)
+    paginator = Paginator(products, 12)
+    page_count = paginator.count
+    page_obj = paginator.get_page(page)
+    if page > 3:
+        i = page -2
+    else:
+        i = 1
 
+    context = {'products':page_obj, 'title':title, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'n' : range(page_count), 'nomatch': nomatch}
+    return context
+
+def Shop_render(request, type, content):
+    return render(request, 'shop.html', shop(request, type, content, 1, 0))
+
+def Shop_render_all(request):
+    return render(request, 'shop.html', shop(request, 'category', 'All', 1, 0))
+
+def Shop_pagination(request, type, content, page):
+    return render(request, 'shop.html', shop(request, type, content, page, 0))
+
+def Shopall_pagination(request, page):
+    return render(request, 'shop.html', shop(request, 'category', 'All', page, 0))
 
 
 def Details(request, id):
