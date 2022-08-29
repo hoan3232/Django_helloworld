@@ -81,6 +81,16 @@ def Details(request, id):
     return render(request, 'details2.html', context)
 
 def Home(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cartItems = order['get_cart_items']
+
     product1 = get_object_or_404(Product, id=2)
     product2 = get_object_or_404(Product, id=3)
     product3 = get_object_or_404(Product, id=4)
@@ -91,11 +101,10 @@ def Home(request):
         category_ = {'products': Product.objects.filter(category__startswith=category), 'category':category}
         category_list.append(category_)
 
-    context={'product1':product1, 'product2':product2, 'product3':product3, 'categories':category_list}
+    context={'product1':product1, 'product2':product2, 'product3':product3, 'categories':category_list, 'cartItems':cartItems}
     return render(request, 'home.html', context)
 
 def Cart(request):
-
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
