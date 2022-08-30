@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
@@ -10,5 +10,9 @@ urlpatterns = [
     #path('<slug:slug>/', views.post_comment, name='post_commnent'),
     path('Details/<int:id>', views.Details, name='details'),
     path('Home/', views.Home, name='home'),
-    path('Shop/<str:type>/<str:content>', views.Shop, name='shop')
+    path('Shop/', views.Shop_render_all, name='shop_all'),
+    path('Shop/<int:page>', views.Shopall_pagination, name='shop_allp'),
+    path('Shop/<str:type>/<str:content>/', views.Shop_render, name='shop'),
+    path('Shop/<str:type>/<str:content>/<int:page>', views.Shop_pagination),
+    
 ]
