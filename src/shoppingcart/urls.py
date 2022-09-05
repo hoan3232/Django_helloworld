@@ -1,3 +1,4 @@
+
 from encodings import search_function
 from django.urls import path
 from . import views
@@ -13,3 +14,6 @@ urlpatterns = [
     path('Home/', views.Home, name='home'),
     path('Shop/<str:type>/<str:content>', views.Shop, name='shop'),
     path('search_product/', views.search_product, name='search_product')]
+
+]
+

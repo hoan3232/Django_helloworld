@@ -1,9 +1,13 @@
 {% extends 'main2.html' %}
 {% load static %}
+{% load mathfilters %}
 {% block extracss %}
 <link href="{% static 'css/shop.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
+
+
+
 <!-- Main -->
 <div class="main container-fluid paddding">
     <section id="sidebar" class="col-3">
@@ -12,7 +16,7 @@
                 <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>Category</span></h6>
             </div>
             <div class="row category-content">
-                <p class="col-12"><a href="{% url 'shop' 'category' 'All' %}"> All books </a> </p>
+                <p class="col-12"><a href="{% url 'shop_all' %}"> All books </a> </p>
                 <p class="col-12"> <a href="{% url 'shop' 'category' 'Fiction' %}"> Fiction </a> </p>
                 <p class="col-12"> <a href="{% url 'shop' 'category' 'Self-Help' %}"> Self-Help </p>
                 <p class="col-12"> <a href="{% url 'shop' 'category' 'Social Science' %}"> Social Science </p>
@@ -68,114 +72,67 @@
         </div> 
 
 <!-- Pagination -->
-    <% if(noMatch == 0) { %>
+    {% if nomatch == 0 %}
         <div class="row justify-content-end">
-            <% if(pages > 0) { %>
+            {% if pages > 0  %}
                 <nav class="ml-auto">
                     <ul class="pagination" style="margin-top: 2rem;">
-
-                        <% if(current == 1) { %>
+                        {% if current == 1 %} 
                             <li class="page-item disabled">
-                                <a class="page-link" href="/shop">First</a>
+                                <a class="page-link" href="{% url 'shop_all' %}">First</a>
                             </li>  
-                        <% } else { %>
+                        {% else %}
                             <li class="page-item">
-                                <a class="page-link" href="/shop">First</a>
+                                <a class="page-link" href="{% url 'shop_all' %}">First</a>
                             </li>
-                        <% } %>
-
-                        <% var i = (Number(current) > 3 ? Number(current) - 2 : 1) %>
-                        <% if(i !== 1) { %>
+                        {% endif %}
+                        
+                        {% if i != 1 %}
                             <li class="page-item disabled">
                                 <a class="page-link" href="#">...</a>
                             </li>
-                        <% } %>
+                        {% endif %} 
 
-                        <% for(; i <= (Number(current) + 2) && i <= pages; i++) { %>
-                            <% if(i == current) { %>
-                                <li class="page-item active">
-                                    <a class="page-link" href="/shop/<%= i %>/"> <%= i %> </a>
-                                </li>
-                            <% } else { %>
-                                <li class="page-item">
-                                    <a class="page-link" href="/shop/<%= i %>/"> <%= i %> </a>
-                                </li>
-                            <% } %>
-                            <% if (i == Number(current) + 2 && i < pages) { %>
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">...</a>
-                                </li>
-                            <% } %>
-                        <% } %>
+                        {% for x in range %}
+                            {% if x <= pages %}
+                                {% if x == current %}
+                                    <li class="page-item active">
+                                        <a class="page-link" href="{% url 'shop_allp' x %}"> {{x}} </a>
+                                    </li>
+    
+                                {% else %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{% url 'shop_allp' x %}"> {{x}}  </a>
+                                    </li>
+                                {% endif %}
 
-                        <% if(current == pages) { %> 
+                                {% if x == current|add:2 and x < pages %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">...</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {% if current == pages %}
                             <li class="page-item disabled">
                                 <a class="page-link" href="#"> Last </a>
                             </li>
-                        <% } else { %>
+                        {% else %}
                             <li class="page-item">
-                                <a class="page-link" href="/shop/<%= pages %>/">Last</a>
+                                <a class="page-link" href="{% url 'shop_allp' pages %}">Last</a>
                             </li>
-                        <% } %>
+                        {%endif%}
                     </ul>
                 </nav>
-            <% } %>
+            {% endif %} 
         </div>
-    <% } %>
-    <% if(flag == 0) { %>
-        <div class="row justify-content-end">
-            <% if(pages > 0) { %>
-                <nav class="ml-auto">
-                    <ul class="pagination" style="margin-top: 2rem;">
+    {% endif %}
 
-                        <% if(current == 1) { %>
-                            <li class="page-item disabled">
-                                <a class="page-link" href="/shop/price/<%= flag1 %>">First</a>
-                            </li>  
-                        <% } else { %>
-                            <li class="page-item">
-                                <a class="page-link" href="/shop/price/<%= flag1 %>">First</a>
-                            </li>
-                        <% } %>
 
-                        <% var i = (Number(current) > 3 ? Number(current) - 2 : 1) %>
-                        <% if(i !== 1) { %>
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">...</a>
-                            </li>
-                        <% } %>
-
-                        <% for(; i <= (Number(current) + 2) && i <= pages; i++) { %>
-                            <% if(i == current) { %>
-                                <li class="page-item active">
-                                    <a class="page-link" href="/shop/price/<%= flag1 %>/<%= i %>/"> <%= i %> </a>
-                                </li>
-                            <% } else { %>
-                                <li class="page-item">
-                                    <a class="page-link" href="/shop/price/<%= flag1 %>/<%= i %>/"> <%= i %> </a>
-                                </li>
-                            <% } %>
-                            <% if (i == Number(current) + 2 && i < pages) { %>
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">...</a>
-                                </li>
-                            <% } %>
-                        <% } %>
-
-                        <% if(current == pages) { %> 
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#"> Last </a>
-                            </li>
-                        <% } else { %>
-                            <li class="page-item">
-                                <a class="page-link" href="/shop/price/<%= flag1 %>/<%= pages %>/">Last</a>
-                            </li>
-                        <% } %>
-                    </ul>
-                </nav>
-            <% } %>
-        </div>
-    <% } %>
+    
+    
 </section>
 </div>
 {% endblock content %}

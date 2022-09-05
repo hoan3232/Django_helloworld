@@ -7,6 +7,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+from django.core.paginator import Paginator
 from .forms import *
 
 
@@ -27,7 +28,49 @@ def Store(request):
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store.html', context)
 
-def Shop(request, type, content):
+def shop(request, type, content, page, nomatch):
+    title = content
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cartItems = order['get_cart_items']
+
+    if type == "category":
+        if content == "All":
+            products = Product.objects.all()
+            title = 'All books'
+        else:
+            products = Product.objects.filter(category = content)
+    elif type == "author":
+        products = Product.objects.filter(author = content)    
+    elif type == "price":
+        if content == "lt2":
+            products = Product.objects.filter(price__lt=200.000)
+            title = 'Less than 200.000 VND'
+        elif content == "gt3":
+            products = Product.objects.filter(price__gt=300.000)
+            title = 'Greater than 300.000 VND'
+        elif content == "r23":
+            products = Product.objects.filter(price__range=[200.000, 300.000])
+            title = '200.000 - 300.000 VND'
+    
+    paginator = Paginator(products, 12)
+    page_count = paginator.num_pages
+    page_obj = paginator.get_page(page)
+
+    if page > 3:
+        i = page -2
+    else:
+        i = 1
+    context = {'products':page_obj, 'title':title, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'range' : range(i, page + 3), 'nomatch': nomatch}
+    return context
+
+def shop_category(request, type, content):
     title = content
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -58,10 +101,20 @@ def Shop(request, type, content):
             products = Product.objects.filter(price__range=[200.000, 300.000])
             title = '200.000 - 300.000 VND'
 
-    
     context = {'products':products, 'title':title, 'cartItems':cartItems}
-    return render(request, 'shop.html', context)
+    return context
 
+
+
+
+def Shop_category_render(request, type, content):
+    return render(request, 'shop.html', shop_category(request, type, content))
+
+def Shop_render_all(request):
+    return render(request, 'shop.html', shop(request, 'category', 'All', 1, 0))
+
+def Shopall_pagination(request, page):
+    return render(request, 'shop.html', shop(request, 'category', 'All', page, 0))
 
 
 def Details(request, id):
