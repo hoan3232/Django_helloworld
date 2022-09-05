@@ -6,17 +6,17 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid align-items-center">
-        <a href="/"><img src="{% static 'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
+        <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item" id="home-menu">
-                    <a href="/" class="menu-item nav-link" >Home</a>
+                    <a href="{% url 'home' %}" class="menu-item nav-link" >Home</a>
                 </li>
                 <li class="nav-item" id="shop-menu">
-                    <a href="/shop" class="menu-item nav-link">Shop</a>
+                    <a href="{% url 'shop_all' %}" class="menu-item nav-link">Shop</a>
                 </li>
                 <li class="nav-item" id="about-menu">
                     <a href="/about" class="menu-item nav-link">About</a>
@@ -24,7 +24,7 @@
             </ul>
             <ul class="navbar-nav ml-auto align-items-center">
                 <li class="nav-item">
-                    <a href="/cart" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i>{{cartItems}}</a>
+                    <a href="{% url 'cart' %}" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i>{{cartItems}}</a>
                 </li>
 				{%if user.is_authenticated %}
 				<li class="nav-item">

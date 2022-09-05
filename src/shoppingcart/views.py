@@ -131,7 +131,7 @@ def Details(request, id):
     product = get_object_or_404(Product, id=id)
     products = Product.objects.filter(category = product.category)[:6]
     context = {'title':'Details', 'product':product, 'cartItems':cartItems, 'products':products}
-    return render(request, 'details.html', context)
+    return render(request, 'details2.html', context)
 
 def Home(request):
     if request.user.is_authenticated:
@@ -185,13 +185,37 @@ def CheckOut(request):
     context = {'title':'Checkout', 'items':items, 'order':order, 'cartItems':cartItems}
     return render(request, 'checkout.html', context)
 
+def About(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cartItems = order['get_cart_items']
+
+    context = {'cartItems':cartItems}
+    return render(request, 'about.html', context)
+
 def search_product(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cartItems = order['get_cart_items']
+
     if request.method == "POST":
         query_name = request.POST.get('name', None)
         title = 'Result for: ' + query_name
         if query_name:
             products = Product.objects.filter(name__contains=query_name)
-            context =  {'title':title, "products":products}
+            context =  {'title':title, "products":products, "cartItems":cartItems}
             return render(request, 'shop.html', context)
 
     return render(request, 'shop.html')

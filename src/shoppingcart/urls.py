@@ -17,7 +17,8 @@ urlpatterns = [
     path('Shop/<int:page>', views.Shopall_pagination, name='shop_allp'),
     path('Shop/<str:type>/<str:content>/', views.Shop_category_render, name='shop'),
     path('Shop/<str:type>/<str:content>', views.shop, name='shop'),
-    path('search_product/', views.search_product, name='search_product')
+    path('search_product/', views.search_product, name='search_product'),
+    path('About/', views.About, name='about')
 
 ]
 
