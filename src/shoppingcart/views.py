@@ -60,14 +60,15 @@ def shop(request, type, content, page, nomatch):
             title = '200.000 - 300.000 VND'
     
     paginator = Paginator(products, 12)
-    page_count = paginator.count
+    page_count = paginator.num_pages
     page_obj = paginator.get_page(page)
+
     if page > 3:
         i = page -2
     else:
         i = 1
 
-    context = {'products':page_obj, 'title':title, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'n' : range(page_count), 'nomatch': nomatch}
+    context = {'products':page_obj, 'title':title, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'range' : range(i, page + 3), 'nomatch': nomatch}
     return context
 
 def Shop_render(request, type, content):

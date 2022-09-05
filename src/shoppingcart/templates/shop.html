@@ -87,46 +87,48 @@
                             </li>
                         {% endif %}
                         
-                        {if i != 1 }
+                        {% if i != 1 %}
                             <li class="page-item disabled">
                                 <a class="page-link" href="#">...</a>
                             </li>
                         {% endif %} 
 
-                        {% for page in n %}
-                            {% if i == current %}
-                                <li class="page-item active">
-                                    <a class="page-link" href="{% url 'shop_allp' i %}"> {{i}} </a>
-                                </li>
-                                {{ i|add:2 }}
-                            {% else %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{% url 'shop_allp' i %}"> {{i}}  </a>
-                                </li>
-                            {% endif %}
-                            
-                            {% if i == current|add:2 %}
-                                
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">...</a>
-                                </li>
-                            {% endif %}
+                        {% for x in range %}
+                            {% if x <= pages %}
+                                {% if x == current %}
+                                    <li class="page-item active">
+                                        <a class="page-link" href="{% url 'shop_allp' x %}"> {{x}} </a>
+                                    </li>
+    
+                                {% else %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{% url 'shop_allp' x %}"> {{x}}  </a>
+                                    </li>
+                                {% endif %}
 
+                                {% if x == current|add:2 and x < pages %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">...</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
+
+
                         {% if current == pages %}
                             <li class="page-item disabled">
                                 <a class="page-link" href="#"> Last </a>
                             </li>
-                        {% else % }
+                        {% else %}
                             <li class="page-item">
-                                <a class="page-link" href="{% url 'shop_allp' pages}">Last</a>
+                                <a class="page-link" href="{% url 'shop_allp' pages %}">Last</a>
                             </li>
                         {%endif%}
                     </ul>
                 </nav>
             {% endif %} 
         </div>
-    
+    {% endif %}
     
 </section>
 </div>
