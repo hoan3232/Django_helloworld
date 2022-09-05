@@ -13,4 +13,7 @@ urlpatterns = [
     path('Shop/', views.Shop_render_all, name='shop_all'),
     path('Shop/<int:page>', views.Shopall_pagination, name='shop_allp'),
     path('Shop/<str:type>/<str:content>/', views.Shop_category_render, name='shop'),
+
+
+    
 ]
