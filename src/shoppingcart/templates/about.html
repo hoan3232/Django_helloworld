@@ -1,0 +1,92 @@
+{% extends 'main2.html' %}
+{% load static %}
+{% block extracss %}
+<link href="{% static 'css/about.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="main container-fluid paddding">
+    <div class="card card-body">
+        <div class="row border-bottom category">
+            <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>About Us</span></h6>
+        </div>
+
+        <div class="content">
+            <h4 class="ttitle">JONGLE'LIVRE</h4>
+            <p>
+                Coming to JONGLE'LIVRE, you will easily find the books you want as well as the latest and hottest books in the world.
+                The bookstore currently has more than 100,000 books of different genres.
+                From history books to science books, from domestic literature to foreign literature and countless books from other topics such as comics, novels,... you can choose and explore.
+            </p>
+            <p>
+                Our primary mission is to bring you good books at reasonable prices.
+                Over the years, JONGLE'LIVRE has had a definite place in the hearts of every book lover. JONGLE'LIVRE is always a prestigious place to be remembered by everyone.
+                Although we are small in size, we are always ready to support you on your way to finding knowledge.
+            </p>
+            <p>
+                Your love and support will be a great motivation for JONGLE'LIVRE to develop more and more.
+            </p>
+
+            <h4 class="ttitle">Main service</h4>
+            <p>
+            <li>Helps you to quickly and accurately search for book information.</li>
+            <li>Nationwide delivery, free shipping with orders over 500,000 VND</li>
+            <li>You can order books through the website. If you want to see directly or get the book from the warehouse, please make an appointment in advance. </li>
+            </p>
+
+            <h4 class="ttitle">A few words</h4>
+            <p>
+            <li>JONGLE'LIVRE has been our passion since college years.
+                With all the passion for books, our team founded JONGLE'LIVRE to spread this passion to everyone. 
+                Hopefully JONGLE'LIVRE will become a common home, or an interesting stop on everyone's way to discover the world of books.
+            </li>
+            <li>We always look forward to everyone's feedback so that we can further improve and develop.</li>
+            <li>All comments please contact us by email: <a href="#">jonglelivre@gmail.com</a></li>
+            </p>
+        </div>
+    </div> 
+</div>
+<!--- Team Section -->
+<button class="team btn btn-primary" data-toggle="collapse" data-target="#meetTheTeam">
+    Meet The Team
+</button>
+<div id="meetTheTeam" class="collapse">
+    <!--- Meet the team -->
+    <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Meet the team</h1>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <!--- Cards -->
+    <div class="container-fluid padding">
+        <div class="row padding align-items-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/teams/hoan.jpg' %}" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h4 class="card-title">Thinh Van Hoan</h4>
+                        <p class="card-text"><b>“Not all those who wander are lost.”</b></p>
+                        <p class="card-text" style="font-size:smaller">- The Lord of the Rings, J.R.R. Tolkein</p>
+                        <a href="https://www.facebook.com/hoan.thinhvan" class="btn btn-outline-secondary">See profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/teams/thong.jpg' %}" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h4 class="card-title">Pham Dung Thong</h4>
+                        <p class="card-text"><b>“It matters not what someone is born, but what they grow to be.”</b></p>
+                        <p class="card-text" style="font-size:smaller">- Harry Potter and the Goblet of Fire, J.K. Rowling</p>
+                        <a href="https://www.facebook.com/mojamozi" class="btn btn-outline-secondary">See profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+</div>
+{% endblock content %}

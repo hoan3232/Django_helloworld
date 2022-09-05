@@ -36,10 +36,11 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid align-items-center">
-		<a href="/"><img src="{% static 'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
-		<form action="/shop" method="GET" class="form-inline ml-auto">
-			<input type="text" class="form-control mr-sm-2" name="search" placeholder="Search">
-			<button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button>
+		<a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="LOGO" class="navbar-brand" width="75" height="75" style="padding-top:0"></a>
+		<form action="{% url 'search_product' %}" method="POST" class="form-inline ml-auto">
+			{% csrf_token %}
+			<input type="text" class="form-control mr-sm-2" name="name" placeholder="Search">
+			<button type="submit" class="btn btn-outline-dark" name="submit" value="Search"><span class="fas fa-search"></span></button>
 		</form>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 			<span class="navbar-toggler-icon"></span>
@@ -47,16 +48,16 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto align-items-center">
 				<li class="nav-item active-menu">
-					<a href="/" class="nav-link menu-item">Home</a>
+					<a href="{% url 'home' %}" class="nav-link menu-item">Home</a>
 				</li>
 				<li class="nav-item">
-					<a href="{% url 'shop' 'category' 'All' %}" class="nav-link menu-item">Shop</a>
+					<a href="{% url 'shop_all' %}" class="nav-link menu-item">Shop</a>
 				</li>
 				<li class="nav-item">
 					<a href="/about" class="nav-link menu-item">About</a>
 				</li> 
 				<li class="nav-item">
-                    <a href="/cart" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i>{{cartItems}}</a>
+                    <a href="{% url 'cart' %}" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i>{{cartItems}}</a>
                 </li>
 				{%if user.is_authenticated %}
 				<li class="nav-item">

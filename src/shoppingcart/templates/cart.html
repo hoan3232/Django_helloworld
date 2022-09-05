@@ -1,11 +1,14 @@
-{% extends 'main.html' %}
+{% extends 'main2.html' %}
 {% load static %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">
+{% endblock %}
 {% block content %}
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="box-element">
 
-				<a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+				<a  class="btn btn-outline-dark" href="{% url 'shop_all' %}">&#x2190; Continue Shopping</a>
 
 				<br>
 				<br>
@@ -43,7 +46,7 @@
 							<img data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
 						</div>
 					</div>
-					<div style="flex:1"><p>${{item.get_total|floatformat:2}}</p></div>
+					<div style="flex:1"><p>${{item.get_total|floatformat:3}}</p></div>
 				</div>
 				{% endfor %}
 			</div>
