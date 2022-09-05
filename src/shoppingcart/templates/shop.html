@@ -16,7 +16,7 @@
                 <h6 class="bbb_viewed_title p-1 col-auto mr-auto"><span>Category</span></h6>
             </div>
             <div class="row category-content">
-                <p class="col-12"><a href="{% url 'shop' 'category' 'All' %}"> All books </a> </p>
+                <p class="col-12"><a href="{% url 'shop_all' %}"> All books </a> </p>
                 <p class="col-12"> <a href="{% url 'shop' 'category' 'Fiction' %}"> Fiction </a> </p>
                 <p class="col-12"> <a href="{% url 'shop' 'category' 'Self-Help' %}"> Self-Help </p>
                 <p class="col-12"> <a href="{% url 'shop' 'category' 'Social Science' %}"> Social Science </p>
@@ -129,6 +129,9 @@
             {% endif %} 
         </div>
     {% endif %}
+
+
+    
     
 </section>
 </div>
