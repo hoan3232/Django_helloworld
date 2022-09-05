@@ -48,9 +48,10 @@
             <div class="carousel-caption">
                 <h1 class="display-2" style="margin-bottom: 12px;">JongLe'Livre</h1>
                 <h3>Juggle the books, balance the world</h3>
-                <form action="/shop" method="GET" class="form-inline ml-auto justify-content-center">
-                    <input type="text" class="form-control mr-sm-2" id="search_id" name="search" placeholder="Search">
-                    <button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button>
+                <form action="{% url 'search_product' %}" method="POST" class="form-inline ml-auto justify-content-center">
+                    {% csrf_token %}
+                    <input type="text" class="form-control mr-sm-2" id="search_id" name="name" placeholder="Search">
+                    <button type="submit" class="btn btn-outline-dark" name="submit" value="Search"><span class="fas fa-search"></span></button>
                 </form>
             </div>
         </div>

@@ -78,7 +78,7 @@ def Details(request, id):
     product = get_object_or_404(Product, id=id)
     products = Product.objects.filter(category = product.category)[:6]
     context = {'title':'Details', 'product':product, 'cartItems':cartItems, 'products':products}
-    return render(request, 'details2.html', context)
+    return render(request, 'details.html', context)
 
 def Home(request):
     if request.user.is_authenticated:
@@ -131,6 +131,17 @@ def CheckOut(request):
 
     context = {'title':'Checkout', 'items':items, 'order':order, 'cartItems':cartItems}
     return render(request, 'checkout.html', context)
+
+def search_product(request):
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        title = 'Result for: ' + query_name
+        if query_name:
+            products = Product.objects.filter(name__contains=query_name)
+            context =  {'title':title, "products":products}
+            return render(request, 'shop.html', context)
+
+    return render(request, 'shop.html')
 
 def updateItem(request):
     data = json.loads(request.body)
