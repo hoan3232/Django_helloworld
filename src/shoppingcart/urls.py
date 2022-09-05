@@ -12,7 +12,5 @@ urlpatterns = [
     path('Home/', views.Home, name='home'),
     path('Shop/', views.Shop_render_all, name='shop_all'),
     path('Shop/<int:page>', views.Shopall_pagination, name='shop_allp'),
-    path('Shop/<str:type>/<str:content>/', views.Shop_render, name='shop'),
-    path('Shop/<str:type>/<str:content>/<int:page>', views.Shop_pagination),
-    
+    path('Shop/<str:type>/<str:content>/', views.Shop_category_render, name='shop'),
 ]
