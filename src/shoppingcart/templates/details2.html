@@ -45,7 +45,12 @@
                 </p>
             </div>
             <hr>
-            <button data-product={{product.id}} data-action ="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            {% if user.is_authenticated %}
+                <button data-product={{product.id}} data-action ="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            {% else %}
+                <a href="{% url 'signin' product.id %}"><button class="btn btn-outline-secondary add-btn">Add to Cart</button></a>
+            {% endif %}
+
         </div>
     </div>
 
