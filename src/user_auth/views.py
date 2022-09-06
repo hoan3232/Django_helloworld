@@ -8,15 +8,17 @@ from shoppingcart.models import Customer, Product
 
 # Create your views here.
 
-def signin_user(request):
+def signin_user(request, place):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username = username, password = password)
         if user is not None:
             login(request, user)
-        
-            return redirect('home')
+            if place == 0:
+                return redirect('home')
+            else:
+                return redirect('details', place)
         else:
             #aaaaaa
             messages.success(request,("Login failled, please try again"))
