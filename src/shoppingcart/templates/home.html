@@ -16,10 +16,12 @@
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"rel="stylesheet'>
 	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
-	<link rel="shortcut icon" href="{%static 'images/logo.ico' %}">
+	<link rel="shortcut icon" href="{% static 'images/logo.ico' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    {% block extracss %}{% endblock %}
+    {% block extracss %}
+
+	{% endblock %}
 
 	<!-- JS files -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -54,14 +56,14 @@
 					<a href="{% url 'shop_all' %}" class="nav-link menu-item">Shop</a>
 				</li>
 				<li class="nav-item">
-					<a href="/about" class="nav-link menu-item">About</a>
+					<a href="{% url 'about' %}" class="nav-link menu-item">About</a>
 				</li> 
 				<li class="nav-item">
                     <a href="{% url 'cart' %}" class="nav-link"><i class='bx bxs-cart bx-md bx-tada-hover' style='color:#5f7a61' title="Cart"></i>{{cartItems}}</a>
                 </li>
 				{%if user.is_authenticated %}
 				<li class="nav-item">
-					<a href="/profile" class="nav-link"><i class='bx bxs-user-circle bx-md bx-burst-hover' style='color:#5f7a61' title="Profile"></i></a>
+					<a href="{% url 'logout' %}?next=/Home" class="nav-link"><i class='bx bxs-user-circle bx-md bx-burst-hover' style='color:#5f7a61' title="Logout"></i></a>
 				</li>
 				{% else %} 
 				<li class="nav-item">
@@ -86,8 +88,8 @@
 			<div class="carousel-caption">
 				<h1 class="display-2">JongLe'Livre</h1>
 				<h3>Juggle the books, balance the world</h3>
-				<a type="button" class="btn btn-outline-light btn-lg" href="/users/signup">Sign Up</a>
-				<a type="button" class="btn btn-primary btn-lg" href="/shop">Shop now</a>
+				<a type="button" class="btn btn-outline-light btn-lg" href="{% url 'signup' %}">Sign Up</a>
+				<a type="button" class="btn btn-primary btn-lg" href="{% url 'shop_all' %}">Shop now</a>
 			</div>
 		</div>
 		<div class="carousel-item">
@@ -107,7 +109,7 @@
 				newsletters and discount.</p>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-			<a href="#"><button type="button" class="btn btn-outline-secondary">GET E-MAIL</button></a>
+			<a href=""><button type="button" class="btn btn-outline-secondary">GET E-MAIL</button></a>
 		</div>
 	</div>
 </div>
@@ -209,7 +211,7 @@
 	<div class="bbb_viewed">
 		<div class="container-fluid padding bbb_main_container">
 			<div class="bbb_viewed_title_container row align-items-center">
-				<h3 class="bbb_viewed_title col-auto mr-auto"><a href="">
+				<h3 class="bbb_viewed_title col-auto mr-auto"><a href="{% url 'shop' 'category' category.category %}">
 						{{ category.category }}
 					</a></h3>
 				<div class="bbb_viewed_nav_container col-auto">

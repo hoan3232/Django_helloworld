@@ -19,7 +19,7 @@
                     <a href="{% url 'shop_all' %}" class="menu-item nav-link">Shop</a>
                 </li>
                 <li class="nav-item" id="about-menu">
-                    <a href="/about" class="menu-item nav-link">About</a>
+                    <a href="{% url 'about' %}" class="menu-item nav-link">About</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto align-items-center">
@@ -28,7 +28,7 @@
                 </li>
 				{%if user.is_authenticated %}
 				<li class="nav-item">
-					<a href="/profile" class="nav-link"><i class='bx bxs-user-circle bx-md bx-burst-hover' style='color:#5f7a61' title="Profile"></i></a>
+					<a href="{% url 'logout' %}?next=/Home" class="nav-link"><i class='bx bxs-user-circle bx-md bx-burst-hover' style='color:#5f7a61' title="Logout"></i></a>
 				</li>
 				{% else %} 
 				<li class="nav-item">
