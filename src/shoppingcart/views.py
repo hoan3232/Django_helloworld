@@ -29,7 +29,7 @@ def Store(request):
     return render(request, 'store.html', context)
 
 def shop(request, type, content, page, nomatch):
-    title = content
+    name = content
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -43,7 +43,7 @@ def shop(request, type, content, page, nomatch):
     if type == "category":
         if content == "All":
             products = Product.objects.all()
-            title = 'All books'
+            name = 'All books'
         else:
             products = Product.objects.filter(category = content)
     elif type == "author":
@@ -51,13 +51,13 @@ def shop(request, type, content, page, nomatch):
     elif type == "price":
         if content == "lt2":
             products = Product.objects.filter(price__lt=200.000)
-            title = 'Less than 200.000 VND'
+            name = 'Less than 200.000 VND'
         elif content == "gt3":
             products = Product.objects.filter(price__gt=300.000)
-            title = 'Greater than 300.000 VND'
+            name = 'Greater than 300.000 VND'
         elif content == "r23":
             products = Product.objects.filter(price__range=[200.000, 300.000])
-            title = '200.000 - 300.000 VND'
+            name = '200.000 - 300.000 VND'
     
     paginator = Paginator(products, 12)
     page_count = paginator.num_pages
@@ -67,11 +67,11 @@ def shop(request, type, content, page, nomatch):
         i = page -2
     else:
         i = 1
-    context = {'products':page_obj, 'title':title, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'range' : range(i, page + 3), 'nomatch': nomatch}
+    context = {'products':page_obj, 'name':name, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'range' : range(i, page + 3), 'nomatch': nomatch}
     return context
 
 def shop_category(request, type, content):
-    title = content
+    name = content
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -85,7 +85,7 @@ def shop_category(request, type, content):
     if type == "category":
         if content == "All":
             products = Product.objects.all()
-            title = 'All books'
+            name = 'All books'
         else:
             products = Product.objects.filter(category = content)
     elif type == "author":
@@ -93,15 +93,15 @@ def shop_category(request, type, content):
     elif type == "price":
         if content == "lt2":
             products = Product.objects.filter(price__lt=200.000)
-            title = 'Less than 200.000 VND'
+            name = 'Less than 200.000 VND'
         elif content == "gt3":
             products = Product.objects.filter(price__gt=300.000)
-            title = 'Greater than 300.000 VND'
+            name = 'Greater than 300.000 VND'
         elif content == "r23":
             products = Product.objects.filter(price__range=[200.000, 300.000])
-            title = '200.000 - 300.000 VND'
+            name = '200.000 - 300.000 VND'
 
-    context = {'products':products, 'title':title, 'cartItems':cartItems}
+    context = {'products':products, 'name':name, 'cartItems':cartItems}
     return context
 
 
