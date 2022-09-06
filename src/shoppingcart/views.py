@@ -67,7 +67,7 @@ def shop(request, type, content, page, nomatch):
         i = page -2
     else:
         i = 1
-    context = {'products':page_obj, 'name':name, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'range' : range(i, page + 3), 'nomatch': nomatch}
+    context = {'title':'Shop', 'products':page_obj, 'name':name, 'cartItems':cartItems, 'pages': page_count, 'current' :page, 'i' : i, 'range' : range(i, page + 3), 'nomatch': nomatch}
     return context
 
 def shop_category(request, type, content):
@@ -101,7 +101,7 @@ def shop_category(request, type, content):
             products = Product.objects.filter(price__range=[200.000, 300.000])
             name = '200.000 - 300.000 VND'
 
-    context = {'products':products, 'name':name, 'cartItems':cartItems}
+    context = {'title':'Shop', 'products':products, 'name':name, 'cartItems':cartItems}
     return context
 
 
@@ -154,7 +154,7 @@ def Home(request):
         category_ = {'products': Product.objects.filter(category__startswith=category), 'category':category}
         category_list.append(category_)
 
-    context={'product1':product1, 'product2':product2, 'product3':product3, 'categories':category_list, 'cartItems':cartItems}
+    context={'title':'Home', 'product1':product1, 'product2':product2, 'product3':product3, 'categories':category_list, 'cartItems':cartItems}
     return render(request, 'home.html', context)
 
 def Cart(request):
@@ -196,7 +196,7 @@ def About(request):
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
         cartItems = order['get_cart_items']
 
-    context = {'cartItems':cartItems}
+    context = {'title':'About', 'cartItems':cartItems}
     return render(request, 'about.html', context)
 
 def search_product(request):
