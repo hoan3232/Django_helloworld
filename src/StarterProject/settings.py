@@ -162,10 +162,10 @@ DATABASES = {
 
     'default':{
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'twqfnxhx',
-        'USER': 'twqfnxhx',
-        'PASSWORD': 'Z3h4faJNh6-2dX4Hc3jNW0tq7htR113E',
-        'HOST': 'kesavan.db.elephantsql.com',
+        'NAME': 'd6btpjsv41v46l',
+        'USER': 'dbquhazqzotfvb',
+        'PASSWORD': '46bd72751ed1bc54c436aaff878e47c2b71a8f6dab5e2cd9d432ab510959f0e7',
+        'HOST': 'ec2-52-207-15-147.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
