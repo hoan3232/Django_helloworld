@@ -18,7 +18,7 @@ for (i = 0; i < updateBtn.length; i++) {
 function updateUserOrder(productID, action) {
     console.log('User is logged in, sending data...')
 
-    var url = '/cart/update_item/'
+    var url = '/update_item/'
 
     fetch(url, {
         method:'POST',

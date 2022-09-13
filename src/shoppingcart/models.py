@@ -12,7 +12,7 @@ class Customer(models.Model):
     email = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Product(models.Model):
     author = models.CharField(default="",max_length=200)
@@ -25,7 +25,7 @@ class Product(models.Model):
     
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     @property
     def imageURL(self):
@@ -34,6 +34,24 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+class Stock(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    stock = models.IntegerField(null=True)
+    sold = models.IntegerField(null=True)
+
+    def __str__(self):
+        return str(self.product.name)
+
+    @property
+    def instock(self):
+        instock = False
+        if self.stock > 0:
+            instock = True
+        return instock
+
+
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -69,6 +87,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
