@@ -7,6 +7,7 @@ admin.site.register(Order)
 admin.site.register(Product)
 admin.site.register(ShippingAddress)
 admin.site.register(OrderItem)
+admin.site.register(Stock)
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'post', 'created_on', 'active')
