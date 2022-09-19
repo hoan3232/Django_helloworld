@@ -110,6 +110,11 @@
 	})
 
 	function submitForm() {
+		var stockData = {
+			'product':item.product,
+			'sold':item.quantity
+		}
+
 		var userData = {
 			'name': null,
 			'email':null,
@@ -142,7 +147,7 @@
 				'Content-Type':'application/json',
 				'X-CSRFToken':csrftoken
 			},
-			body:JSON.stringify({'form': userData, 'shipping':shipData})
+			body:JSON.stringify({'form': userData, 'shipping':shipData, 'stock':stockData})
 		})
 
 		.then((response) => response.json())
