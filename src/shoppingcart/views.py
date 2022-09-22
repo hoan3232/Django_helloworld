@@ -123,14 +123,16 @@ def Details(request, id):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
+        
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
         cartItems = order['get_cart_items']
 
+    stock = Stock.objects.get(id = id).instock
     product = get_object_or_404(Product, id=id)
     products = Product.objects.filter(category = product.category)[:6]
-    context = {'title':'Details', 'product':product, 'cartItems':cartItems, 'products':products}
+    context = {'title':'Details', 'product':product, 'cartItems':cartItems, 'products':products, 'stock':stock}
     return render(request, 'details2.html', context)
 
 def Home(request):
@@ -166,9 +168,18 @@ def Cart(request):
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        cartItems = order['get_cart_items']   
+        cartItems = order['get_cart_items']  
 
-    context =  {'title':'Cart', 'items':items, 'order':order, 'cartItems':cartItems}
+    intsock = []
+    instock = [0 for i in range(len(items))]
+    k = 0
+    for i in items:
+        instock[k] =  Stock.objects.get(id=i.id).quantity
+        k += 1
+
+    zipped = zip(items,instock)
+
+    context =  {'title':'Cart', 'zip':zipped, 'order':order, 'cartItems':cartItems}
     return render(request, 'cart.html', context)
 
 def CheckOut(request):

@@ -22,7 +22,7 @@ def signin_user(request, place):
         else:
             #aaaaaa
             messages.success(request,("Login failled, please try again"))
-            return redirect('signin')
+            return redirect('signin', 0)
     else:
         return render(request, 'signin.html', {})
 
@@ -52,7 +52,7 @@ def signup_user(request):
         
 
         
-        return redirect('signin')
+        return redirect('signin', 0)
 
     return render(request,'signup.html',{})
 
