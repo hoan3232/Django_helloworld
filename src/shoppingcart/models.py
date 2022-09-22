@@ -50,10 +50,6 @@ class Stock(models.Model):
             instock = True
         return instock
 
-    @property
-    def quantity(self):
-        return self.stock
-
 
 
 
